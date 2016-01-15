@@ -1,0 +1,25 @@
+.woocommerce div.product div.images img.animateViewerToggleCtrBtn {
+	width: 32px !important;
+	height: auto !important;
+}
+
+
+.pierry-group-swatch-wrapper {
+	max-width: 245px;
+} 
+
+label.pierry-swatch-wrapper {
+	display: inline-block;
+	margin: 2px;
+	padding:0px;
+}
+label.pierry-swatch-wrapper  > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+
+label.pierry-swatch-wrapperl > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+}
+label.pierry-swatch-wrapper > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+}

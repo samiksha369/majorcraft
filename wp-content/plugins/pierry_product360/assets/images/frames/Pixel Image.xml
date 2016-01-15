@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--Outer Frame Vector Graphics Description File-->
+<VectorDescription Version="1.23">
+  <Frame Attribute="Ceramic">
+    <Top Width="2000" Height="220">CeramicT.png</Top>
+    <Left Width="220" Height="1560">CeramicL.png</Left>
+    <Right Width="220" Height="1560">CeramicR.png</Right>
+    <Bottom Width="2000" Height="220">CeramicB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Iron">
+    <Top Width="2000" Height="200">IronT.png</Top>
+    <Left Width="200" Height="1600">IronL.png</Left>
+    <Right Width="200" Height="1600">IronR.png</Right>
+    <Bottom Width="2000" Height="200">IronB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Lace Brown">
+    <Top Width="2000" Height="200">LaceBrownT.png</Top>
+    <Left Width="280" Height="1600">LaceBrownL.png</Left>
+    <Right Width="280" Height="1600">LaceBrownR.png</Right>
+    <Bottom Width="2000" Height="200">LaceBrownB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Lace Flower">
+    <Top Width="2000" Height="350">LaceFlowerT.png</Top>
+    <Left Width="350" Height="1300">LaceFlowerL.png</Left>
+    <Right Width="350" Height="1300">LaceFlowerR.png</Right>
+    <Bottom Width="2000" Height="350">LaceFlowerB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Orange 21">
+    <Top Width="2000" Height="250">Orange21T.png</Top>
+    <Left Width="250" Height="1500">Orange21L.png</Left>
+    <Right Width="250" Height="1500">Orange21R.png</Right>
+    <Bottom Width="2000" Height="250">Orange21B.png</Bottom>
+  </Frame>
+  <Frame Attribute="Space">
+    <Top Width="2000" Height="280">SpaceT.png</Top>
+    <Left Width="280" Height="1440">SpaceL.png</Left>
+    <Right Width="280" Height="1440">SpaceR.png</Right>
+    <Bottom Width="2000" Height="280">SpaceB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Wood Art">
+    <Top Width="2000" Height="200">WoodArtT.png</Top>
+    <Left Width="200" Height="1600">WoodArtL.png</Left>
+    <Right Width="200" Height="1600">WoodArtR.png</Right>
+    <Bottom Width="2000" Height="200">WoodArtB.png</Bottom>
+  </Frame>
+  <Frame Attribute="Wood Thick">
+    <Top Width="2000" Height="350">WoodThickT.png</Top>
+    <Left Width="350" Height="1300">WoodThickL.png</Left>
+    <Right Width="350" Height="1300">WoodThickR.png</Right>
+    <Bottom Width="2000" Height="350">WoodThickB.png</Bottom>
+  </Frame>
+</VectorDescription>

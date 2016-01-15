@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+.pierry_variation_fields_cont {
+	border-bottom: none;
+}
+
+.pierry_variation_fields_cont td{
+	border-top: none;
+} 
+
+.pierry_variation_fields_cont tr:nth-child(odd) td, 
+.pierry_variation_fields_cont tr:nth-child(odd) th {
+	background: none;
+	vertical-align: top;
+}
+
+.pierry_variation_fields_cont tr:nth-child(even) td, 
+.pierry_variation_fields_cont tr:nth-child(even) th {
+	background: none;
+}

@@ -1,0 +1,1065 @@
+var Ortery = Ortery || {
+}
+;
+!function (){
+  Ortery.PhotoLoader = function (){
+    this.Images = [], 
+    this.Images.counter = 0;
+  }
+  , Ortery.PhotoLoader.prototype = {
+    createImgAndStore : function (index, image_src, file_case){
+      var i = document.createElement("img");
+      h = this.Images;
+      ("UpperCase" === file_case) ? image_src = image_src.toUpperCase() : "LowerCase" === file_case && (image_src = image_src.toLowerCase()); 
+      i.src = image_src;
+      i.onload = function (){
+        h.counter++;
+        h[index] = this;
+        i = null;
+      }
+    }
+    , getImageArray : function (){
+      return this.Images
+    }
+    , clearImages : function() {
+    	// reset
+    	this.Images = [];
+        this.Images.counter = 0;
+    }
+  }
+}
+();
+var Ortery = Ortery || {
+}
+;
+!function (){
+  function b(d, c){
+    return "jpeg" === c && (c = "jpg"), "circle" === d || "cylindrical" === d ? function (
+    e, f){
+      // EZ - out image path contains everythign including faename part up to sequantial number.
+      // DO NOT add img to path name
+      //return e + "img" + f + "." + c
+      return e+f+'.' + c;
+    }
+     : "hemispherical" === d ? function (f, i, h, g){
+      return f + "N" + g + "-" + i + "." + c
+    }
+     : "spherical" === d ? function (f, i, h, g){
+      return f + h + g + "-" + i + "." + c
+    }
+     : void(0)
+  }
+  Ortery.StandlonePhotoLoader = function (image_path,object_model, file_case){
+	  
+    var A, z, y = 1, x = 1, w = "N";
+    v = object_model.imageFormat || "jpg";
+    u = object_model.Model
+    t = object_model.Rows;
+    s = object_model.Columns, 
+    total_images = t * s;
+    q = t / 2 + 1; 
+    p = this .getPathPattern(u, v);
+    file_case = file_case  || "Default";
+    
+    this.clearImages();
+    for ( A = 0; A < total_images; A ++ ){
+    	z = x + "";
+    	1 === z.length && (z = "0" + z);
+    	this.createImgAndStore(A, p(image_path, z, w, y), file_case);
+    	x >= s ? (x = 1, y ++ ) : x ++;
+    	"spherical" === u && y === q && (w = "S", y = 1)
+    }
+  }
+  
+  Ortery.StandlonePhotoLoader.prototype = new Ortery.PhotoLoader;
+  Ortery.StandlonePhotoLoader.prototype.getPathPattern = b;
+}
+(), function (b){
+  Ortery.getCoordinates || (Ortery.getCoordinates = function (a){
+    var f, e;
+    return  - 1 === a.type.search("mouse") ? a.touches && a.touches.length ? (f = a.
+    touches[0].pageX, e = a.touches[0].pageY) : a.changedTouches && a.changedTouches.
+    length && (f = a.changedTouches[0].pageX, e = a.changedTouches[0].pageY) : a.pageX || 
+    a.pageY ? (f = a.pageX, e = a.pageY) : (a.clientX || a.clientY) && (f = a.clientX + b.
+    body.scrollLeft + b.documentElement.scrollLeft, e = a.clientY + b.body.scrollTop + b.
+    documentElement.scrollTop), [f, e]
+  }
+  )
+}
+(document), function (){
+  if (!Ortery.enviroment){
+    var r, q, p, o, n, m, l, k, j = navigator.userAgent;
+    p =! (!j.match(/Android/i) ||! j.match(/Mobile Safari/i)), q = Boolean(navigator.
+    platform.match(/iPad|iPhone|iPod/i)), r = function (){
+      return q ?! 0 :!! j.match(/iPhone|iPad|Android|Blackberry|Windows CE|Palm/i)
+    }
+    (), o = function (){
+      var b = document.createElement("canvas");
+      return !(!b.getContext ||! b.getContext("2d"))
+    }
+    (), n = function (){
+      var a, d;
+      return r ?! 1 : window.WebGLRenderingContext ? (a = document.createElement("canvas")
+      , (d = a.getContext("webgl") || a.getContext("experimental-webgl")) ?! 0 : (console.
+      log("Init WebGL failed") ,! 1)) :! 1
+    }
+    (), m = function (){
+      return document.implementation.hasFeature(
+      "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1")
+    }
+    (), l = function (){
+      var b = document.createElement("audio");
+      return Boolean(b.canPlayType)
+    }
+    (), k = function (){
+      var b = document.createElement("div");
+      return b.innerHTML = "<!--[if lt IE 9]><i></i><![endif]-->", 1 === b.
+      getElementsByTagName("i").length
+    }
+    (), Ortery.environment = {
+      ViK1w9I3qSj : r, isIOSDevice : q, gjV6o7XtjQE : p, p0URicG3K5g : o, DGbNr1m4PDc : m, 
+      hk7lq4TY3Zi : l, isWebGLSupported : n, isOldIE : k
+    }
+  }
+}
+(), function (){
+  Ortery.getSizeToFitContainer || (Ortery.getSizeToFitContainer = function (i, h){
+    var n, m, l = i[0], k = i[1], j = l / k;
+    return j >= 1 ? h >= 1 && h > j ? (n = l, m = n / h) : (m = k, n = m * h) : 1 >= h && 
+    j > h ? (m = k, n = m * h) : (n = l, m = n / h), [ ~~ n ,~~ m]
+  }
+  )
+}
+(), jQuery.noConflict();
+var Ortery = Ortery || {
+}
+;
+Ortery.TruView = function (){
+  return this instanceof Ortery.TruView ? void 0 : new Ortery.TruView
+}
+, function (T, S, R, Q){
+  function P(d, c){
+    return "UpperCase" === d ? c.toUpperCase() : "LowerCase" === d ? c.toLowerCase() : c
+  }
+  function O(g, k, j, i){
+    var h = {
+    }
+    , a = [];
+    T.ajax({
+      global :! 1, url : g.pathProfiles + "&i=" + Math.random(), dataType : "text xml", 
+      success : function (b){
+        var d = N(b, g);
+        h = d[0], a = d[1]
+      }
+      , error : function (e, d, f){
+        console.info("Can't load xml file.\njqXHR:" + e.status + ", textStatus:" + d + 
+        ", errorThrown:" + f)
+      }
+      , complete : function (){
+        var b, d, m, l, f, e, c;
+        ("photo" === h.ControlsPageButton || "combo" === h.ControlsPageButton) && (h.pagePhotoArray = J(
+        a.length, g.pathPages, g.fileNamingCase)), b = g.pathImages, B && g.useSpriteImg ? 
+        d = I(b, h, g.fileNamingCase) : (c = new Ortery.StandlonePhotoLoader(b/* + "Lv2/"*/, {
+          Model : h.Model, Rows : h.Rows, Columns : h.
+          Columns
+        }
+        , g.fileNamingCase), d = c.getImageArray()), h.useSpriteImg = g.useSpriteImg, m = 
+        Ortery.getSizeToFitContainer([j, i], h.spaceAspectRatio), l = m[0] > m[1] ? m[0] : 
+        m[1], f = M(h, a, l, [j, i]), h.oXgg7XiecK8 = b, h.Qza9178cmsR = g.pathIcons, h.
+        z6BTIDH68yN = m, h.iHgDSCUUcWw = g.autoAllocation, h.UV5QAvr2Pqr = g.UV5QAvr2Pqr, 
+        h.isConcurrent = g.isConcurrent, h.fileNamingCase = g.fileNamingCase, h.
+        cylindricalDragDirection = g.cylindricalDragDirection.toLowerCase(), h.
+        maxSpaceEdge = l, e = L(h), K(f, e, k, d)
+      }
+    }
+    )
+  }
+  function N(a, l){
+    var k, /*j = T("#animateScript").prop("src").match(/(.*)(HTML5Loader.js)$/i)[1],*/ e = {
+    }
+    , d = [];
+    return "string" == typeof a ? (k = new ActiveXObject("Microsoft.XMLDOM"), k.async =! 1
+    , k.loadXML(a)) : k = a, T(k).find("Profile").each(function (){
+      e.producer = T(this ).attr("Producer") || "truview", "thirdParty" === e.producer.
+      toLowerCase() && (B =! 1), T(this ).find("Object").each(function (){
+        var c, m = T(this );
+        if (e.Model = m.attr("Model").toLowerCase(), "spherical" !== e.Model || 
+        F || (c = "UpperCase" === l.fileNamingCase ? j + "HTML5Angle.js".toUpperCase() : 
+        "LowerCase" === l.fileNamingCase ? j + "HTML5Angle.js".toLowerCase() : j + 
+        "HTML5Angle.js", T.ajax({
+          global :! 1, url : c, dataType : "script", async :! 1
+        }
+        ), F =! 0), e.Rows =~~ m.attr("Rows"), e.Columns =~~ m.attr("Columns"), 
+        e.Width =~~ m.attr("Width"), e.Height =~~ m.attr("Height"),
+        e.ursecDgHnBj
+         = e.Width * e.Height > 5000000, e.Inertia = m.attr("Inertia") && 
+        "true" === m.attr("Inertia").toLowerCase(), e.FreeRotate = m.attr("FreeRotate")
+         === Q ?! 0 : "true" === m.attr("FreeRotate").toLowerCase(), m.find("Space").each(
+        function (){
+          var f = T(this );
+          e.spaceAspectRatio = f.attr("Width") / f.attr("Height")
+        }
+        ), m.find("Frame").each(function (){
+          var f = T(this );
+          e.Draw = f.attr("Draw") && "true" === f.attr("Draw").toLowerCase(), e.
+          Draw && (e.Style = f.attr("Style"), e.Attribute = f.attr(
+          "Attribute"), e.FrameColor = f.attr("Color")), e.BackgroundColor = f.attr(
+          "Background")
+        }
+        ), e.Draw){
+          /* 
+           * this code only executed if Frame Draw='True' . 
+           * It defines frame deawn around presentation area
+           */
+          var h = l.pathFrames, g = h + P(l.fileNamingCase, e.Style + ".xml");
+          T.ajax({
+            global :! 1, url : g + "?" + Math.random(), dataType : "text xml", async :! 1, 
+            success : function (f){
+              var n, i = {
+              }
+              ;
+              "string" == typeof f ? (n = new ActiveXObject("Microsoft.XMLDOM"), n.async =! 
+              1, n.loadXML(f)) : n = f, "Contemporary" === e.Style ? T(n).find("Bar"
+              ).each(function (){
+                var o = T(this );
+                i.location = o.attr("Location") && o.attr("Location").toLowerCase(), 
+                i.HiPercent = o.attr("HiPercent")
+              }
+              ) : "Flash Bar" === e.Style ? (T(n).find("Bar").each(function (){
+                var o = T(this );
+                i.location = o.attr("Location") && o.attr("Location").toLowerCase(), i.
+                HiPercent = o.attr("HiPercent")
+              }
+              ), T(n).find("Speed").each(function (){
+                var o = T(this );
+                "Fast" === e.Attribute ? i.Speed = 100 * o.attr("Fast") : "Medium"
+                 === e.Attribute ? i.Speed = 100 * o.attr("Medium") : "Slow" === e
+                .Attribute && (i.Speed = 100 * o.attr("Slow"))
+              }
+              )) : "Pixel Image" === e.Style && T(n).find("Frame").each(function (){
+                var o, t, s, r, q, p = T(this );
+                e.Attribute === p.attr("Attribute") && (p.find("Top").each(function (){
+                  var b = T(this );
+                  o = {
+                    sizeW :~~ b.attr("Width"), sizeH :~~ b.attr("Height"), imgPath : h + b
+                    .text()
+                  }
+                }
+                ), p.find("Left").each(function (){
+                  var u = T(this );
+                  t = {
+                    sizeW :~~ u.attr("Width"), sizeH :~~ u.attr("Height"), imgPath : h + u
+                    .text()
+                  }
+                }
+                ), p.find("Right").each(function (){
+                  var u = T(this );
+                  s = {
+                    sizeW :~~ u.attr("Width"), sizeH :~~ u.attr("Height"), imgPath : h + u
+                    .text()
+                  }
+                }
+                ), p.find("Bottom").each(function (){
+                  var u = T(this );
+                  r = {
+                    sizeW :~~ u.attr("Width"), sizeH :~~ u.attr("Height"), imgPath : h + u
+                    .text()
+                  }
+                }
+                ), q = (o.sizeH || 0) + (t.sizeH || s.sizeH || 0) + (r.sizeH || 0), 0 === q && (q = 1), o && 
+                (o.eGViHzj19t6 = o.sizeH / q, i.nudtccKv9Ju = o, o.sizeH = null), t && (t.
+                eGViHzj19t6 = t.sizeH / q, i.vhe2vnMu1kV = t, t.sizeH = null), s && (s.
+                eGViHzj19t6 = s.sizeH / q, i.v0JnKj29Hoy = s, s.sizeH = null), r && (r.
+                eGViHzj19t6 = r.sizeH / q, i.ckT11Imtvmv = r, r.sizeH = null))
+              }
+              ), e.bFVdeRZ0I4g = h, e.YINVbkFb34w = i
+            }
+          }
+          )
+        }
+        m.find("Controls").each(function (){
+          var f = T(this );
+          e.Folder = f.attr("Folder"), e.ControlsLeft = f.attr("Left"), e.ControlsBottom = 
+          f.attr("Bottom"), e.ControlsDimensions = f.attr("Dimension"), e.ControlsMoveButton = f.attr(
+          "Move") && f.attr("Move").toLowerCase(), e.ControlsZoomButton = f.attr("Zoom") && f.
+          attr("Zoom").toLowerCase(), e.ControlsPlayButton = f.attr("Play") && f.attr("Play").
+          toLowerCase(), e.ControlsPageButton = f.attr("Page") && f.attr("Page").toLowerCase(), 
+          e.ControlsShow = "true" === f.attr("Show").toLowerCase()
+        }
+        ), e.pYBFZ99pfjo = e.ControlsZoomButton && "hide" !== e.ControlsZoomButton, m.find("Description").each(
+        function (){
+          e.Text = T(this ).text()
+        }
+        ), m.find("Controller").each(function (){
+          var f = T(this );
+          e.PhaseIn =~~ f.attr("PhaseIn"), e.Repeatness = f.attr("Repeatness") && 
+          "true" === f.attr("Repeatness").toLowerCase(), e.RotateTime = f.attr(
+          "RotateTime") / 10 * 1000 / e.Columns, e.Direction = f.attr("Direction") && 
+          "cw" === f.attr("Direction").toLowerCase(), e.Flip = f.attr("Flip") && 
+          "true" === f.attr("Flip").toLowerCase() && 1 !== e.Rows
+        }
+        ), m.find("Link").each(function (){
+          var f = T(this );
+          e.linkTarget = f.attr("Style") && f.attr("Style").toLowerCase(), e.sVMDofkCoa8 = 
+          f.text()
+        }
+        ), m.find("InitView").each(function (){
+          var f = T(this );
+          B && (e.HUE9PBxg4jS =~~ f.attr("Columns"), e.initiaViewWidth =~~ f.attr("Width"), 
+        		e.InitiaViewHeight =~~ f.attr("Height"));
+          e.rW6t5CtRDm1 = f.attr("ZoomMax") / 10; 
+          e.Cs3viULhwSb = f.attr("ZoomMin") / 10;
+          e.m9ugat5Q70k = f.attr("ZoomFactor") / 100
+        }
+        ), m.find("Media").each(function (){
+          var f = T(this );
+          e.mediaType = f.attr("Type") && f.attr("Type").toLowerCase(), e.mediaSyle = f.
+          attr("Style"), e.mediaSource = l.pathMedia + f.text()
+        }
+        ), m.find("ContextMenu").each(function (){
+          e.KQqeBOxQNgq = T(this ).attr("Text"), e.sCUn8igE7fB = T(this ).text()
+        }
+        ), m.find("NoShow").each(function (){
+          "cylindrical" === e.Model || "hemispherical" === e.Model ? (e.
+          BsWo0BzEc8o =! 0, e.Inertia =! 1) : e.BsWo0BzEc8o =! 1, e.hwRu8RgEokB =~~ T(
+          this ).attr("from") - 1, e.je098qml1Gu =~~ T(this ).attr("to") - 1
+        }
+        )/*, e.W2tEERtb61r = l.pathProfiles.match(/(.+\/)(.+\.(xml))/i)[1]*/
+      }
+      ), e.U36JBGhGIaf =! 1, T(this ).find("Page").each(function (){
+        var c = T(this ), g = {
+          LEVikrT7fOR : [], YfUS0EVLDDs : c.attr("Title"), jdlKi7WYJcW : 1000 * c.attr(
+          "Time")
+        }
+        ;
+        if (A && c.find("Sign").each(function (){
+          var h = T(this ), i = {
+            type : h.attr("Type") && h.attr("Type").toLowerCase(), source : l.pathTiles + 
+            h.attr("Source"), offset : {
+              x : h.attr("OffsetX"), y : h.attr("OffsetY")
+            }
+            , w : h.attr("W"), h : h.attr("H"), a :~~ h.attr("A"), c : h.attr("Color") || 
+            "00FF0000"
+          }
+          ;
+          e.U36JBGhGIaf =! 0, h.find("Title").each(function (){
+            i.title = T(this ).text()
+          }
+          ), h.find("TextBlock").each(function (){
+            var m, n = T(this );
+            i.yk0NyQ6w2m5 = {
+              width : n.attr("W"), align : n.attr("Align") && n.attr("Align").toLowerCase
+              () || "left", strings : []
+            }
+            , m = i.yk0NyQ6w2m5, n.find("String").each(function (){
+              var o = T(this ), b = {
+                WwiCts24DzZ : o.text(), fontFamily : o.attr("FontFamily") || "Arial", 
+                fontSize :~~ o.attr("FontSize") || 12, fontWeight : o.attr("FontWeight") || 
+                "Normal", fontStyle : o.attr("FontStyle") || "Normal", DNzbqJlu0rF : o.
+                attr("Color") || "FF000000", p : {
+                  x : o.attr("X"), y : o.attr("Y")
+                }
+              }
+              ;
+              m.strings.push(b)
+            }
+            )
+          }
+          ), h.find("Pointer").each(function (){
+            var m = T(this );
+            i.j856l9nuNw0 = {
+              x : m.attr("X"), y : m.attr("Y")
+            }
+          }
+          ), h.find("Animation").each(function (){
+            var m = T(this );
+            i.animation = {
+              B6Tr9Jaidxe : m.attr("Style") && m.attr("Style").toLowerCase() || "static", 
+              O1uvuA5XSuy : m.attr("StartTime") / 10, qOZ6IRKzo0M : m.attr("Duration") / 
+              10
+            }
+          }
+          ), h.find("Link").each(function (){
+            var m = T(this );
+            i.link = {
+              linkTarget : m.attr("Style") && m.attr("Style").toLowerCase(), jvD3EgwScvx : 
+              m.text()
+            }
+          }
+          ), z && h.find("Audio").each(function (){
+            var m = T(this );
+            i.xGzkjOZP7gZ = {
+              filepath : l.pathAudios + m.attr("Source"), eYHIZBk4dXm : m.attr("Loop") && 
+              "true" === m.attr("Loop").toLowerCase(), mYiCUQOGf7d : m.attr("Lasting") && 
+              "true" === m.attr("Lasting").toLowerCase()
+            }
+          }
+          ), g.LEVikrT7fOR.push(i)
+        }
+        ), z && c.children("Audio").each(function (){
+          var h = T(this );
+          g.pageAudio = {
+            filepath : l.pathAudios + h.attr("Source"), eYHIZBk4dXm : h.attr("Lasting") && 
+            "true" === h.attr("Loop").toLowerCase(), mYiCUQOGf7d : h.attr("Lasting") && 
+            "true" === h.attr("Lasting").toLowerCase(), UiO4OFWTzWY : 1000 * h.attr(
+            "StartTime")
+          }
+          , C && (g.pageAudio.UiO4OFWTzWY =- 1000)
+        }
+        ), c.find("Geo").each(function (){
+          var h, i = T(this );
+          g.tB8vK3ay7Vq = {
+          }
+          , i.find("Angles").each(function (){
+            var m = T(this );
+            g.tB8vK3ay7Vq = {
+              ak2gYBJ955P :~~ m.attr("T"), g1WhmjvC1cN :~~ m.attr("P"), qsnNwzDhOLM :~~ m.
+              attr("W")
+            }
+          }
+          ), h = g.tB8vK3ay7Vq, i.find("Scale").each(function (){
+            h.H2nXXQc8T27 = T(this ).attr("Z") / 10
+          }
+          ), i.find("Pan").each(function (){
+            var b = T(this );
+            h.lxVoWV4Y2RT = {
+              x : b.attr("X"), y :- b.attr("Y")
+            }
+          }
+          )
+        }
+        ), e.U36JBGhGIaf &&! G && A){
+          var f;
+          f = "UpperCase" === l.fileNamingCase ? j + "HTML5Drawer.js".toUpperCase() : 
+          "LowerCase" === l.fileNamingCase ? j + "HTML5Drawer.js".toLowerCase() : j + 
+          "HTML5Drawer.js", T.ajax({
+            global :! 1, url : f, dataType : "script", async :! 1
+          }
+          ), G =! 0
+        }
+        d.push(g)
+      }
+      )
+    }
+    ), k = null, [e, d]
+  }
+  function M(a, b, c){
+    var Z, Y, X, W, V, U, w, v, u, t, s, r = c / 4000, q = b.length;
+    for (("hide" !== a.ControlsMoveButton || "hide" !== a.ControlsZoomButton || "hide" !== a.ControlsPlayButton
+    ) && (a.ctrBtnSize = a.ControlsDimensions * r, a.ctrBtnSize > 64 && (a.ctrBtnSize = 64)), v = 
+    0;
+    q > v;
+    v ++ ){
+      if (A){
+        for (Z = b[v].LEVikrT7fOR.length, u = 0; Z > u; u ++ ){
+          if (Y = b[v].LEVikrT7fOR[u], X = Y.offset, X.x *= r, X.y *= r, Y.w *= r, Y.h *= 
+          r, V = Y.yk0NyQ6w2m5){
+            for (V.width *= r, U = b[v].LEVikrT7fOR[u].yk0NyQ6w2m5.strings.length, w = V.
+            strings, t = 0; U > t; t ++ ){
+              w[t].fontSize *= 10 * r, w[t].p.x *= r, w[t].p.y *= r, w[t].p.w *= r
+            }
+          }
+          Y.j856l9nuNw0 && (W = Y.j856l9nuNw0, W.x *= r, W.y *= r)
+        }
+      }
+      s = b[v].tB8vK3ay7Vq.lxVoWV4Y2RT, s.x *= r, s.y *= r
+    }
+    return [a, b]
+  }
+  function L(d){
+    var c;
+    return c = B && d.useSpriteImg ? d.dZC1rRHFjVp ? "spherical" === d.Model ? 2 : 1
+     : d.Rows * Math.ceil(d.Columns / d.HUE9PBxg4jS) : d.Rows * d.
+    Columns, function (b){
+      return b.counter === c
+    }
+  }
+  function K(g, f, j, i){
+    if (f(i)){
+      var h = new Ortery.TruView;
+      h.Qi84rdqsacT(j, i, g)
+    }
+    else {
+      setTimeout(function (){
+        K(g, f, j, i)
+      }
+      , 500)
+    }
+  }
+  function J(n, m, l){
+    var k, e, b = [], a = 0;
+    for (e = function (i, f){
+      var d = S.createElement("img");
+      T(d).load(function (){
+        b[f] = this , this .naturalWidth || (this .naturalWidth = this .width), this .
+        naturalHeight || (this .naturalHeight = this .height), d = null
+      }
+      ), d.src = m + P(l, "Page" + i + ".jpg")
+    }
+    ;
+    n > a;
+    a ++ ){
+      k = a + 1, 10 > k && (k = "0" + k), e(k, a)
+    }
+    return b
+  }
+  function I(Y, X){
+    var W, V, U, w, v, u, t, s, r, q = new Ortery.PhotoLoader, p =! 1, a =! 0;
+    if (T.browser.mozilla && (U = X.Columns * X.initiaViewWidth, w = "spherical" === X.
+    Model ? X.Rows / 2 * X.InitiaViewHeight : X.Rows * X.InitiaViewHeight, (U > 
+    32000 || w > 32000) && (p =! 0)), p || D){
+      for (v = Math.ceil(X.Columns / X.HUE9PBxg4jS), u = X.Rows, t = 0;
+      u > t;
+      t ++ ){
+        for (s = 0; v > s; s ++ ){
+          W = s + 1, 10 > W && (W = "0" + W), V = t + 1, 10 > V && (V = "0" + V), r = t * 
+          v + s, q.createImgAndStore(r, Y + "R" + V + W + ".jpg")
+        }
+      }
+      a =! 1
+    }
+    else {
+      q.createImgAndStore(0, Y + "Ni.jpg"), "spherical" === X.Model && q.
+      createImgAndStore(1, Y + "Si.jpg")
+    }
+    return X.dZC1rRHFjVp = a, q.getImageArray()
+  }
+  var H = (navigator.userAgent, navigator.platform ,! 1), G =! 1, F =! 1;
+  Ortery.TruView.VERSION = "1.7.35";
+  var E = Ortery.environment, D = E.ViK1w9I3qSj, C = E.isIOSDevice, B = E.p0URicG3K5g, A = 
+  E.DGbNr1m4PDc, z = E.hk7lq4TY3Zi;
+  Ortery.TruView.prototype.correctPathCase = P;
+  var y = {
+    UV5QAvr2Pqr : {
+      show :! 1, text : "Use mouse right button to switch pan or rotate action."
+    }
+    , pathProfiles : "./Profiles/ProfileL.xml", pathImages : "./Images/", pathIcons : 
+    "./Profiles/Icons/", pathFrames : "./Profiles/Frames/", pathPages : 
+    "./Profiles/Icons/", pathTiles : "./Profiles/Tiles/", pathAudios : 
+    "./Profiles/Audios/", pathMedia : "./Profiles/Media/", fileNamingCase : "Default", 
+    cylindricalDragDirection : "horizontal", useSpriteImg :! 0, isConcurrent :! 1, 
+    extraConcurrentElem : "", autoAllocation :! 0
+  }
+  , x = {
+    init : function (n, m){
+      var f, e, c, b = this , a = this .length;
+      return n = T.extend({
+      }
+      , y, n), B || (n.useSpriteImg =! 1), c = n.fileNamingCase, this .each(function (l){
+        var k, h, d, Y, X, W, V, U, w, p, j = T(this ), i = {
+        }
+        ;
+        for (U in n){
+          i[U] = T.isArray(n[U]) ? n[U][l] : n[U], U.match(/path/) && (i[U] = P(c, i[U]))
+        }
+        for (m && (this ._callback = T.isArray(m) && m[l] ? m[l] : m), this .isConcurrent = 
+        i.isConcurrent, this .ut6MKiFirc5 = [], k = 0;
+        a > k;
+        k ++ ){
+          k !== l && this .ut6MKiFirc5.push(b[k])
+        }
+        if (w = i.extraConcurrentElem){
+          if (T.isArray(w)){
+            for (p = T(w).length, k = 0;
+            p > k;
+            k ++ ){
+              if (Y = w[k], T.isArray(Y)){
+                for (h = 0; h < Y.length; h ++ ){
+                  if ("string" == typeof Y[h]){
+                    for (X = T(Y[h]), d = 0;
+                    d < X.length;
+                    d ++ ){
+                       - 1 === T.inArray(X[d], this .ut6MKiFirc5) && X[d] !== this  && (T(
+                      X[d]).data("bePartner" ,! 0), this .ut6MKiFirc5.push(X[d]))
+                    }
+                  }
+                }
+              }
+              else {
+                if ("string" == typeof Y){
+                  for (X = T(Y), d = 0;
+                  d < X.length;
+                  d ++ ){
+                     - 1 === T.inArray(X[d], this .ut6MKiFirc5) && X[d] !== this  && (T(X[
+                    d]).data("bePartner" ,! 0), this .ut6MKiFirc5.push(X[d]))
+                  }
+                }
+              }
+            }
+          }
+          else {
+            if ("string" == typeof w){
+              for (X = T(w), d = 0;
+              d < X.length;
+              d ++ ){
+                 - 1 === T.inArray(X[d], this .ut6MKiFirc5) && X[d] !== this  && (T(X[d]).
+                data("bePartner" ,! 0), this .ut6MKiFirc5.push(X[d]))
+              }
+            }
+          }
+        }
+        W = i.autoAllocation ===! 0 ? R.innerWidth || S.documentElement.clientWidth : j.
+        innerWidth() || 600, V = i.autoAllocation ===! 0 ? R.innerHeight || S.
+        documentElement.clientHeight : j.innerHeight() || 600;
+        var g = P(c, "iconLoading.gif");
+        j.css({
+          width : W, height : V, "user-select" : "none"
+        }
+        ).append('<div class="animateViewerLoader" style="background-image:url(' + i.pathIcons + g + 
+        ')"></div>'), i.autoAllocation && (H || (x._setFullScreenEnviroment(i.
+        autoAllocation), f = R.innerWidth || S.documentElement.clientWidth, e = R.
+        innerHeight || S.documentElement.clientHeight), /*j.css("position", "absolute"),*/ i.
+        autoAllocation !==! 0 || E.isOldIE ? i.autoAllocation !==! 0 && j.css({
+          left : f > W ? (f - W) / 2 : 0, top : e > V ? (e - V) / 2 : 0
+        }
+        ) : j.css({
+          width : "100%", height : "100%"
+        }
+        ), W = parseInt(j.css("width"), 10), V = parseInt(j.css("height"), 10)), O(i, j, W, V)
+      }
+      )
+    }
+    , _setFullScreenEnviroment : function (b){
+      var a = T('<meta name = "viewport" />');
+      b ===! 0 ? a.attr("content", 
+      "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no") : a.
+      attr("content", "user-scalable=no"), T("head").append(a), S.body.style.margin = 
+      "0px", H =! 0
+    }
+    , setBackgroundColor : function (a){
+      return this .each(function (){
+        var e = T(this ), b = e.attr("style");
+        e.attr("style", b + " background-color:" + a + " !important;")
+      }
+      )
+    }
+    , setNativeFullScreen : function (a, d){
+      return this .each(function (){
+        function b(){
+          var e = a[0], f = e.requestFullScreen || e.webkitRequestFullScreen || e.
+          mozRequestFullScreen;
+          f && f.call(e)
+        }
+        d ? T(d).on("click", b) : b()
+      }
+      )
+    }
+    , _changeCtnBtnDisplayStatus : function (a, l, k){
+      var j, i = a, h = T(a);
+      j = function (){
+        var s, r, q, p, o, n, g, f = h.find(".animateViewerToggleCtrBtn"), c = f.data(
+        "show");
+        if (("toggle" === l || "show" === l &&! c || "hide" === l && c) && f.trigger(
+        "conCurrentClick"), i._operateAnimation && (r = i._operateAnimation("get", 
+        "isConcurrent"))){
+          for (p = i.ut6MKiFirc5, o = p.length, s = 0; o > s; s ++ ){
+            q = p[s], n = T(q).find(".animateViewerToggleCtrBtn"), g = n.data("show"), (
+            "toggle" === l || "show" === l &&! g || "hide" === l && g) && n.trigger(
+            "conCurrentClick")
+          }
+        }
+      }
+      , k ? T(k).on("click", j) : j()
+    }
+    , showControlBar : function (b){
+      return this .each(function (){
+        x._changeCtnBtnDisplayStatus(this , "show", b)
+      }
+      )
+    }
+    , hideControlBar : function (b){
+      return this .each(function (){
+        x._changeCtnBtnDisplayStatus(this , "hide", b)
+      }
+      )
+    }
+    , toggleControlBar : function (b){
+      return this .each(function (){
+        x._changeCtnBtnDisplayStatus(this , "toggle", b)
+      }
+      )
+    }
+    , zoomIn : function (a){
+      return this .each(function (e){
+        var b = T(this );
+        a ? T(a).on("click", function (c){
+          b.find(".animateViewerZoomIn").trigger("click", [c, "zoomIn"])
+        }
+        ) : b.find(".animateViewerZoomIn").trigger("click", [e, "zoomIn"])
+      }
+      )
+    }
+    , zoomOut : function (a){
+      return this .each(function (e){
+        var b = T(this );
+        a ? T(a).on("click", function (c){
+          b.find(".animateViewerZoomOut").trigger("click", [c, "zoomOut"])
+        }
+        ) : b.find(".animateViewerZoomOut").trigger("click", [e, "zoomOut"])
+      }
+      )
+    }
+    , pan : function (a){
+      return this .each(function (){
+        function e(){
+          b.find(".animateViewerMovePan").trigger("click")
+        }
+        var b = T(this );
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , rotate : function (a){
+      return this .each(function (){
+        function e(){
+          b.find(".animateViewerMoveRotate").length ? b.find(".animateViewerMoveRotate").
+          trigger("click") : b.find(".animateViewerMovePan").trigger("click")
+        }
+        var b = T(this );
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , toggleMove : function (a){
+      return this .each(function (){
+        var g, f, b = this ;
+        g = function (){
+          var c = T(this );
+          "pan" === c.data("ort3d_CwHYe2sA2uZ") ? c.find(".animateViewerMoveRotate").
+          length ? c.find(".animateViewerMoveRotate").trigger("conCurrentClick") : c.find(
+          ".animateViewerMovePan").trigger("conCurrentClick") : c.find(
+          ".animateViewerMovePan").trigger("conCurrentClick")
+        }
+        , f = function (){
+          var e, c, i, h;
+          if (g.call(b), c = b._operateAnimation("get", "isConcurrent")){
+            for (h = b.ut6MKiFirc5, i = h.length, e = 0; i > e; e ++ ){
+              g.call(h[e])
+            }
+          }
+        }
+        , a ? T(a).on("click", function (){
+          f()
+        }
+        ) : f()
+      }
+      )
+    }
+    , autoTurn : function (a){
+      return this .each(function (){
+        function e(){
+          b.find(".animateViewerPlayStart").trigger("click")
+        }
+        var b = T(this );
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , stopTurn : function (a){
+      return this.each(function (){
+        function e(){
+          0 !== b.find(".animateViewerPlayStop").length ? b.find(".animateViewerPlayStop"
+          ).trigger("click") : b.find(".animateViewerPlayStart").trigger("click")
+        }
+        var b = T(this );
+        a ? T(a).on("click", e) : e()
+      });
+    }
+    , toggleTurn : function (a){
+      return this .each(function (){
+        var g, f, b = this ;
+        g = function (){
+          var c = T(this );
+          c.data("ort3d_isTurning") ? 0 !== c.find(".animateViewerPlayStop").length ? c.
+          find(".animateViewerPlayStop").trigger("conCurrentClick") : c.find(
+          ".animateViewerPlayStart").trigger("conCurrentClick") : c.find(
+          ".animateViewerPlayStart").trigger("conCurrentClick")
+        }
+        , f = function (){
+          var e, c, i, h;
+          if (g.call(b), c = b._operateAnimation("get", "isConcurrent")){
+            for (h = b.ut6MKiFirc5, i = h.length, e = 0; i > e; e ++ ){
+              g.call(h[e])
+            }
+          }
+        }
+        , a ? T(a).on("click", function (){
+          f()
+        }
+        ) : f()
+      }
+      )
+    }
+    , openMagnifier : function (a){
+      return this .each(function (){
+        function g(){
+          var d, k, j, i, e;
+          if (f._operateAnimation && (b.find(".animateViewerMagnifierDiv").is(":visible")
+           || b.find(".animateViewerMagnifier").trigger("conCurrentClick"), k = f.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = f.ut6MKiFirc5, e = i.length, d = 0; e > d; d ++ ){
+              j = i[d], T(j).find(".animateViewerMagnifierDiv").is(":visible") || T(j).
+              find(".animateViewerMagnifier").trigger("conCurrentClick")
+            }
+          }
+        }
+        var f = this , b = T(this );
+        a ? T(a).on("click", g) : g()
+      }
+      )
+    }
+    , closeMagnifier : function (a){
+      return this .each(function (){
+        function g(){
+          var d, k, j, i, e;
+          if (f._operateAnimation && (b.find(".animateViewerMagnifierDiv").is(":visible")
+           && b.find(".animateViewerMagnifier").trigger("conCurrentClick"), k = f.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = f.ut6MKiFirc5, e = i.length, d = 0; e > d; d ++ ){
+              j = i[d], T(j).find(".animateViewerMagnifierDiv").is(":visible") && T(j).
+              find(".animateViewerMagnifier").trigger("conCurrentClick")
+            }
+          }
+        }
+        var f = this , b = T(this );
+        a ? T(a).on("click", g) : g()
+      }
+      )
+    }
+    , toggleMagnifier : function (a){
+      return this .each(function (){
+        var b = T(this );
+        a ? T(a).on("click", function (){
+          b.find(".animateViewerMagnifier").trigger("click")
+        }
+        ) : b.find(".animateViewerMagnifier").trigger("click")
+      }
+      )
+    }
+    , zoomToMax : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("get", "b8nCnG6eOwM") || b.
+          _operateAnimation("exec", "BoJY2XsQd9B"), d = b._operateAnimation("get", 
+          "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && (j._operateAnimation("get", "b8nCnG6eOwM")
+               || j._operateAnimation("exec", "BoJY2XsQd9B"))
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , zoomToMin : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("get", "b8nCnG6eOwM") || b.
+          _operateAnimation("exec", "ww65C4TNGpl"), d = b._operateAnimation("get", 
+          "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && (j._operateAnimation("get", "b8nCnG6eOwM")
+               || j._operateAnimation("exec", "ww65C4TNGpl"))
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , setTurnSpeed : function (a, d){
+      return "object" != typeof a && (d = a, a = Q), this .each(function (){
+        var c, b = this ;
+        isNaN(d) || (c = function (){
+          var h, e, k, j, i;
+          if (b._operateAnimation && (b._operateAnimation("set", "RotateTime", d), e = b.
+          _operateAnimation("get", "isConcurrent"))){
+            for (j = b.ut6MKiFirc5, i = j.length, h = 0; i > h; h ++ ){
+              k = j[h], k._operateAnimation && k._operateAnimation("set", "RotateTime", d
+              )
+            }
+          }
+        }
+        , a ? T(a).on("click", c) : c())
+      }
+      )
+    }
+    , nextColumn : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("exec", "j2KnWvHTixA"), d = b.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && j._operateAnimation("exec", "j2KnWvHTixA"
+              )
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , previousColumn : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("exec", "mCY0Z9JKWOn"), d = b.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && j._operateAnimation("exec", "mCY0Z9JKWOn"
+              )
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , upperRow : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("exec", "Sz3iwreesbg"), d = b.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && j._operateAnimation("exec", "Sz3iwreesbg"
+              )
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , lowerRow : function (a){
+      return this .each(function (){
+        var e, b = this ;
+        e = function (){
+          var g, d, j, i, h;
+          if (b._operateAnimation && (b._operateAnimation("exec", "RRGMDBhTUTy"), d = b.
+          _operateAnimation("get", "isConcurrent"))){
+            for (i = b.ut6MKiFirc5, h = i.length, g = 0; h > g; g ++ ){
+              j = i[g], j._operateAnimation && j._operateAnimation("exec", "RRGMDBhTUTy"
+              )
+            }
+          }
+        }
+        , a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , openConcurrent : function (b){
+      return this .each(function (){
+        var a, d = this ;
+        a = function (){
+          var c;
+          if (d._operateAnimation){
+            if (c = d._operateAnimation("get", "isConcurrent")){
+              return 
+            }
+            d._operateAnimation("set", "isConcurrent" ,! 0), d._operateAnimation("exec", 
+            "canvasRotate", 360)
+          }
+        }
+        , b ? b.on("click", a) : a()
+      }
+      )
+    }
+    , closeConcurrent : function (b){
+      return this .each(function (){
+        var a, d = this ;
+        a = function (){
+          var c;
+          if (d._operateAnimation){
+            if (c = d._operateAnimation("get", "isConcurrent") ,! c){
+              return 
+            }
+            d._operateAnimation("set", "isConcurrent" ,! 1)
+          }
+        }
+        , b ? b.on("click", a) : a()
+      }
+      )
+    }
+    , toggleConcurrent : function (a){
+      return this .each(function (){
+        function e(){
+          var c;
+          b._operateAnimation && (c = b._operateAnimation("get", "isConcurrent"), b.
+          _operateAnimation("set", "isConcurrent" ,! c))
+        }
+        var b = this ;
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , toggleFrame : function (a){
+      return this .each(function (){
+        function e(){
+          var c = b.find(".animateViewerEaselDiv");
+          c.length > 0 && (c.is(":visible") ? c.hide() : c.show())
+        }
+        var b = T(this );
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+    , togglePageSlide : function (a){
+      return this .each(function (){
+        var b = T(this );
+        a ? T(a).on("click", function (){
+          b.find(".animateViewerStartPageBtn").trigger("click")
+        }
+        ) : b.find(".animateViewerStartPageBtn").trigger("click")
+      }
+      )
+    }
+    , toggleInertia : function (a){
+      return this .each(function (){
+        function e(){
+          var d, c;
+          b._operateAnimation && (d = b._operateAnimation("get", "BsWo0BzEc8o"), c = b.
+          _operateAnimation("get", "Inertia"), d || b._operateAnimation("set", 
+          "Inertia" ,! c))
+        }
+        var b = this ;
+        a ? T(a).on("click", e) : e()
+      }
+      )
+    }
+  }
+  ;
+  T.fn.animate3D = function (a){
+    return x[a] ? x[a].apply(this , Array.prototype.slice.call(arguments, 1)) : "object" != 
+    typeof a && a ? void T.error("Method does not exist.") : x.init.apply(this , arguments)
+  }
+}
+(jQuery, document, window), function (r){
+  /*var q, p, o, n, m, l = r("#animateScript").prop("src").match(/(.*)(HTML5Loader.js)$/i), 
+  k = l[1], j = l[2];
+  "HTML5LOADER.JS" === j ? (o = k + "HTML5Viewer.css".toUpperCase(), n = k + 
+  "jQueryPlugin.js".toUpperCase(), m = k + "HTML5Viewer.js".toUpperCase()) : 
+  "html5loader.js" === j ? (o = k + "HTML5Viewer.css".toLowerCase(), n = k + 
+  "jQueryPlugin.js".toLowerCase(), m = k + "HTML5Viewer.js".toLowerCase()) : (o = k + 
+  "HTML5Viewer.css", n = k + "jQueryPlugin.js", m = k + "HTML5Viewer.js"), q = document.
+  createElement("link"), r(q).prop({
+    rel : "stylesheet", type : "text/css", href : o
+  }
+  ), r("head")[0].appendChild(q), p = function (a){
+    a = a.replace("#", "%23"), r.ajax({
+      url : a, global :! 1, dataType : "script", async :! 1
+    }
+    )
+  }
+  , p(n), p(m)*/
+}
+(jQuery);

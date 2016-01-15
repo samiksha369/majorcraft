@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+
+.pierry-product360-config td {
+	vertical-align: top;
+}
+
+
+.button_theme-preview {
+    display: inline-block;
+    vertical-align: bottom;
+    padding-left: 25px;	
+}
+.section-title {
+
+}
+
+.control-group {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.submit {
+	
+}
+/* editing swatches */
+.term-swatch-wrap .swatch-upload-preview {
+	width: 64px;
+	height: 64px;	
+}
+
+.column-swatch_image img.swatch_preview {
+	width: 32px;
+	height: 32px;
+}
+
+#swatch_size, #swatch_size_2 {
+	width: 50px;
+}
+
+.radio-container {
+	padding-left: 40px;
+	margin-bottom: 5px;
+}

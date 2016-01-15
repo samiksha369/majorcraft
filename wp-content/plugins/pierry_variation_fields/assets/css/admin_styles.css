@@ -1,0 +1,42 @@
+@CHARSET "UTF-8";
+
+td.forminp-pv_field_list {
+	border-bottom: 1px solid #ccc;
+}
+td.forminp-pv_field_list .dashicons {
+	vertical-align: top;
+	cursor: pointer;
+}
+
+.forminp-pv_field_list td {
+	vertical-align: top;
+}
+td.forminp-pv_field_list input[type=text] {
+	vertical-align: top;
+}
+
+.pierry_variation_list_cont {
+	display: inline-block;
+	margin-left: 30px;
+}
+
+.pierry_variation_list_cont label {
+	margin-bottom: 10px;
+}
+
+.pierry_variation_list_cont > ul > li {
+	float: left;
+}
+.pierry_variation_list {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+.pierry_variation_list li{
+	padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 0px;
+}
+
+.pierry_variation_list li > ul{
+	padding-left: 15px;
+}
